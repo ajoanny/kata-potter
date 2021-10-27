@@ -1,5 +1,14 @@
 require './lib/potter'
 RSpec.describe Kata do
+  # 1 livre
+  # 2 livres identiques
+  # 2 livres
+  # 3 livres dont deux identiques
+  # 3 livres différents
+  # 4 livres avec deux identiques
+  # 4 livres différents
+  # finir une réduction avant de passer à la suivante
+
   # 2 - Avec deux fois le même livre
   # 3 - Avec 2 livres différents
   # 4 - Avec 3 livres différents
@@ -41,5 +50,30 @@ RSpec.describe Kata do
       expect(price([2, 3])).to eq(total - five_percent_discount)
     end
   end
-end
 
+  describe 'when there are 3 different books' do
+    it 'apply 10% discount' do
+      total = 24
+      ten_percent_discount = total * 0.10
+      expect(price([4, 5, 3])).to eq(total - ten_percent_discount)
+    end
+  end
+
+  describe 'when there are 3 books, with 2 different books' do
+    it 'apply 5% discount' do
+      total = 24
+      two_books_price = 16
+      five_percent_discount = two_books_price * 0.05
+      expect(price([4, 5, 4])).to eq(total - five_percent_discount)
+    end
+  end
+
+  describe 'when there are 4 books, with 3 different books' do
+    it 'apply 10% discount' do
+      total = 32
+      three_books_price = 24
+      discount = three_books_price * 0.10
+      expect(price([4, 5, 4, 3])).to eq(total - discount)
+    end
+  end
+end
